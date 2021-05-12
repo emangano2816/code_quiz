@@ -1,6 +1,7 @@
 * {
     font-size: 62.5%;
     font-family:Arial, Helvetica, sans-serif;
+    color:rgb(82, 78, 78);
 }
 
 /*Styles for header container*/
@@ -13,7 +14,11 @@
 
 .header-container .high-scores {
     text-decoration:none;
+    color:#dda1f5;
+}
 
+.high-scores:hover {
+    color:rgb(92, 45, 99);
 }
 
 .timer-container {
@@ -30,7 +35,8 @@
 
 /*Styles for quiz-intro container*/
 .quiz-intro,
-.quiz-questions {
+.quiz-questions,
+.alldone-container {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -39,13 +45,15 @@
     height: 300px;
 }
 
-.quiz-intro .quiz-header {
+.quiz-header,
+.alldone-header, 
+.collect-hs-initials {
     font-size:3rem;
     width: 50%;
     text-align: center;
 }
 
-.quiz-intro .quiz-instr {
+.quiz-instr {
     font-size: 1.5rem;
     width: 50%;
     text-align: left;
@@ -64,6 +72,7 @@
     font-size: 2.5rem;
     width: 100%;
     height: 50px;
+    /* color:rgb(82, 78, 78); */
 }
 
 .result-container {
@@ -75,14 +84,22 @@
     padding-top: 5px;
 }
 
+/*Styles specific to the alldone-container*/
+#initials {
+    width:25%;
+    margin-bottom: 25px;
+}
+
 /*Button styles*/
 .start-btn,
-.answer-btn {
+.answer-btn,
+.submit-init-btn {
     width: 150px;
     height: 30px;
     font-size:2rem;
     border-radius: 5px;
     cursor:pointer;
+    color:white;
     background: linear-gradient(#dda1f5,rgb(104, 55, 110));
     background-blend-mode:soft-light;
 }
@@ -94,7 +111,8 @@
 }
 
 .start-btn:hover,
-.answer-btn:hover {
+.answer-btn:hover,
+.submit-init-btn:hover {
     transition: all, 3s, ease-in;
     opacity: 0.75;
 }
