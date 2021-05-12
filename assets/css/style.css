@@ -74,7 +74,6 @@
     font-size: 2.5rem;
     width: 100%;
     height: 50px;
-    /* color:rgb(82, 78, 78); */
 }
 
 .result-container {
@@ -88,7 +87,7 @@
 
 /*Styles specific to the alldone-container*/
 #initials {
-    width:25%;
+    width:15%;
     margin-bottom: 25px;
 }
 
