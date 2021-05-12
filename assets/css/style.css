@@ -63,5 +63,5 @@
 
 .start-btn:hover {
     transition: all, 3s, ease-in;
-    background-color:#dda1f5;
+    opacity: 0.75;
 }
