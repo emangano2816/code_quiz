@@ -6,7 +6,7 @@ let questions = [
         choiceB: "Declares a function.",
         choiceC: "Declares a class.",
         choiceD: "Stops the execution of a function and returns a value from that function.",
-        answer: "B"         
+        answer: "D"         
     },
     {
         question:"How do you make a single line comment in JavaScript?",
@@ -47,8 +47,13 @@ const gobackstart = document.querySelector(".goback-btn")
 //creating variables to track questions
 const lastQuestion = questions.length - 1;
 let runningQuestion = 0;
+let score = 0;
 
 function displayQuestions() {
+    //Hide quiz intro after start button is clicked and display the question section
+    quizdisplay.setAttribute("style", "display: none");
+    questdisplay.setAttribute("style", "display: block");
+
     question.innerText = questions[runningQuestion].question;
     choice1.innerText = questions[runningQuestion].choiceA;
     choice2.innerText = questions[runningQuestion].choiceB;
@@ -58,12 +63,30 @@ function displayQuestions() {
 
 function checkAnswer(response) {
     if(questions[runningQuestion].answer==response) {
-        console.log('Correct')
+        console.log('Correct');
+        answer.setAttribute("style", "display:block");
+        answer.innerHTML = "Correct";
+        score += 5;   //add 5 points for correct answer
+        console.log(score);
+        nextQuestion();
     } else {
-        console.log('Incorrect')
+        console.log('Incorrect');
+        answer.setAttribute("style", "display:block");
+        answer.innerHTML = "Incorrect";
+        nextQuestion();
     }
 }
 
+function nextQuestion() {
+    if (runningQuestion < lastQuestion) {
+        runningQuestion++;  //go to the next question
+        displayQuestions();
+    } else {
+        console.log("Show all-done section");
+        questdisplay.setAttribute("style", "display: none");
+        donedisplay.setAttribute("style","display: block")
+    }
+}
 /*Start quize after user clicks 'start quiz' button*/
 startquiz.addEventListener("click",displayQuestions)
 
