@@ -15,7 +15,7 @@ let questions = [
         choiceC: "/",
         choiceD: "<!--",
         answer: "A"
-    }
+    },
     {
         question:"Which array method adds new elements to the end of an array and returns the new length?",
         choiceA: "join()",
@@ -23,7 +23,7 @@ let questions = [
         choiceC: "push()",
         choiceD: "map()",
         answer: "C"
-    }
+    },
     {
         question:"Which string method checks whether a string ends with a specified string/characters?",
         choiceA: "endsWith()",
@@ -31,7 +31,7 @@ let questions = [
         choiceC: "charAt()",
         choiceD: "match()",
         answer: "A"
-    }
+    },
     {
         question:"Which comparison operator means equal value and equal type?",
         choiceA: "==",
@@ -39,7 +39,7 @@ let questions = [
         choiceC: "=",
         choiceD: "===",
         answer: "D"
-    }
+    },
     {
         question:"Which is NOT a JavaScript data type?",
         choiceA: "Number",
@@ -47,7 +47,7 @@ let questions = [
         choiceC: "String",
         choiceD: "Boolean",
         answer: "B"
-    }
+    },
     {
         question:"Which assignment operator subtracts a value from a variable?",
         choiceA: "=",
@@ -55,7 +55,7 @@ let questions = [
         choiceC: "*=",
         choiceD: "-=",
         answer: "D"
-    }
+    },
     {
         question:"Which is true about JavaScript objects:",
         choiceA: "They are containers for named values called properties or methods.",
@@ -63,7 +63,7 @@ let questions = [
         choiceC: "Object methods can be accessed with objectName.methodName().",
         choiceD: "All of the above",
         answer: "D"
-    }
+    },
     {
         question:"Which results in false?",
         choiceA: "5=='5'",
@@ -71,7 +71,7 @@ let questions = [
         choiceC: "5==='5'",
         choiceD: "5>=2+3",
         answer: "C"
-    }
+    },
     {
         question:"Which does NaN stand for?",
         choiceA: "Not a Number",
@@ -80,12 +80,12 @@ let questions = [
         choiceD: "Not as Neat",
         answer: "A"
     }
-
 ]
 //Assigning HTML elements to variables
 /*Header*/
 const headerdisplay = document.querySelector(".header-container");
 const hs_link = document.querySelector(".high-scores");
+const timedisplay = document.querySelector(".timer-container");
 const seconds = document.querySelector(".seconds");
 /*Quiz Intro*/
 const quizdisplay = document.querySelector(".quiz-intro-display") 
@@ -113,10 +113,23 @@ const lastQuestion = questions.length - 1;
 let runningQuestion = 0;
 let score = 0;
 
+//creating variables to track time
+let sec = 60;
+let timer = setInterval(function() {
+        seconds.innerHTML=sec;
+        sec--;
+        if (sec < 0) {
+            clearInterval(timer);
+            allDone();
+        }
+    }, 1000);
+
+
 function displayQuestions() {
-    //Hide quiz intro after start button is clicked and display the question section
+    //Display changes after user clicks start quiz
     quizdisplay.setAttribute("style", "display: none");
     questdisplay.setAttribute("style", "display: block");
+    timedisplay.setAttribute("style", "visibility: visible")
 
     question.innerText = questions[runningQuestion].question;
     choice1.innerText = questions[runningQuestion].choiceA;
@@ -137,19 +150,25 @@ function checkAnswer(response) {
         console.log('Incorrect');
         answer.setAttribute("style", "display:block");
         answer.innerHTML = "Incorrect";
+        sec -= 10;
         nextQuestion();
     }
 }
 
 function nextQuestion() {
-    if (runningQuestion < lastQuestion) {
+    if (runningQuestion < lastQuestion && sec > 0) {
         runningQuestion++;  //go to the next question
         displayQuestions();
     } else {
         console.log("Show all-done section");
-        questdisplay.setAttribute("style", "display: none");
-        donedisplay.setAttribute("style","display: block")
+        allDone();
     }
+}
+
+function allDone() {
+    questdisplay.setAttribute("style", "display: none");
+    donedisplay.setAttribute("style","display: block")
+    timedisplay.setAttribute("style", "visibility:hidden")
 }
 /*Start quize after user clicks 'start quiz' button*/
 startquiz.addEventListener("click",displayQuestions)
