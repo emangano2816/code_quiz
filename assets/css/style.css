@@ -33,6 +33,14 @@
     font-weight: bold;
 }
 
+/*Hiding sections to start application*/
+.quiz-questions-display,
+.alldone-display,
+.highscore-display,
+.result.container {
+    display: none;
+}
+
 /*Styles for quiz-intro container*/
 .quiz-intro,
 .quiz-questions-container,
