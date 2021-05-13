@@ -41,6 +41,10 @@
     display: none;
 }
 
+.timer-container {
+    visibility: hidden;
+}
+
 /*Styles for quiz-intro container*/
 .quiz-intro,
 .quiz-questions-container,
