@@ -98,6 +98,11 @@
 }
 
 /*Styles specific to the alldone-container*/
+.totalscore-line {
+    font-size:1.5rem;
+    color:indigo;
+
+}
 #initials {
     width:15%;
     margin-bottom: 25px;
