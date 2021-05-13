@@ -18,25 +18,42 @@ let questions = [
     }
 ]
 
+//Assigning HTML elements to variables
+/*Header*/
+const headerdisplay = document.querySelector(".header-container");
+const hs_link = document.querySelector(".high-scores");
+const seconds = document.querySelector(".seconds");
+/*Quiz Intro*/
+const quizdisplay = document.querySelector(".quiz-intro-display") 
+const startquiz = document.querySelector(".start-btn");
+/*Quiz Question*/
+const questdisplay = document.querySelector(".quiz-questions-display");
 const question = document.querySelector(".question");
 const choice1 = document.querySelector(".answer1");
 const choice2 = document.querySelector(".answer2");
 const choice3 = document.querySelector(".answer3");
 const choice4 = document.querySelector(".answer4");
 const answer = document.querySelector(".result-container");
+/*All Done*/
+const donedisplay = document.querySelector(".alldone-display");
+const initials = document.querySelector("#initials");
+const submitinit = document.querySelector(".submit-init-btn");
+/*High Score*/
+const hsdisplay = document.querySelector(".highscore-display");
+const hs_line = document.querySelector(".highscore-li")
+const clearscores = document.querySelector(".clear-scores-btn");
+const gobackstart = document.querySelector(".goback-btn")
 
 //creating variables to track questions
 const lastQuestion = questions.length - 1;
 let runningQuestion = 0;
 
 function displayQuestions() {
-    let q = questions[runningQuestion];
-
-    question.innerText = q.question;
-    choice1.innerText = q.choiceA;
-    choice2.innerText = q.choiceB;
-    choice3.innerText = q.choiceC;
-    choice4.innerText = q.choiceD;
+    question.innerText = questions[runningQuestion].question;
+    choice1.innerText = questions[runningQuestion].choiceA;
+    choice2.innerText = questions[runningQuestion].choiceB;
+    choice3.innerText = questions[runningQuestion].choiceC;
+    choice4.innerText = questions[runningQuestion].choiceD;
 }
 
 function checkAnswer(response) {
@@ -47,5 +64,7 @@ function checkAnswer(response) {
     }
 }
 
+/*Start quize after user clicks 'start quiz' button*/
+startquiz.addEventListener("click",displayQuestions)
 
 
