@@ -16,8 +16,72 @@ let questions = [
         choiceD: "<!--",
         answer: "A"
     }
-]
+    {
+        question:"Which array method adds new elements to the end of an array and returns the new length?",
+        choiceA: "join()",
+        choiceB: "pop()",
+        choiceC: "push()",
+        choiceD: "map()",
+        answer: "C"
+    }
+    {
+        question:"Which string method checks whether a string ends with a specified string/characters?",
+        choiceA: "endsWith()",
+        choiceB: "concat()",
+        choiceC: "charAt()",
+        choiceD: "match()",
+        answer: "A"
+    }
+    {
+        question:"Which comparison operator means equal value and equal type?",
+        choiceA: "==",
+        choiceB: "!==",
+        choiceC: "=",
+        choiceD: "===",
+        answer: "D"
+    }
+    {
+        question:"Which is NOT a JavaScript data type?",
+        choiceA: "Number",
+        choiceB: "Variable",
+        choiceC: "String",
+        choiceD: "Boolean",
+        answer: "B"
+    }
+    {
+        question:"Which assignment operator subtracts a value from a variable?",
+        choiceA: "=",
+        choiceB: "+=",
+        choiceC: "*=",
+        choiceD: "-=",
+        answer: "D"
+    }
+    {
+        question:"Which is true about JavaScript objects:",
+        choiceA: "They are containers for named values called properties or methods.",
+        choiceB: "Object properties can be accessed with objectName.propertyName.",
+        choiceC: "Object methods can be accessed with objectName.methodName().",
+        choiceD: "All of the above",
+        answer: "D"
+    }
+    {
+        question:"Which results in false?",
+        choiceA: "5=='5'",
+        choiceB: "5===5.0",
+        choiceC: "5==='5'",
+        choiceD: "5>=2+3",
+        answer: "C"
+    }
+    {
+        question:"Which does NaN stand for?",
+        choiceA: "Not a Number",
+        choiceB: "No and No",
+        choiceC: "Not a Nuetral",
+        choiceD: "Not as Neat",
+        answer: "A"
+    }
 
+]
 //Assigning HTML elements to variables
 /*Header*/
 const headerdisplay = document.querySelector(".header-container");
