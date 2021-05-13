@@ -37,7 +37,7 @@
 .quiz-questions-display,
 .alldone-display,
 .highscore-display,
-.result.container {
+.result-container {
     display: none;
 }
 
