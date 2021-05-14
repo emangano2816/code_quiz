@@ -100,6 +100,7 @@ const choice4 = document.querySelector(".answer4");
 const answer = document.querySelector(".result-container");
 /*All Done*/
 const donedisplay = document.querySelector(".alldone-display");
+const totalscoredisplay = document.querySelector(".totalscore-line");
 const initials = document.querySelector("#initials");
 const submitinit = document.querySelector(".submit-init-btn");
 /*High Score*/
@@ -166,10 +167,29 @@ function nextQuestion() {
 }
 
 function allDone() {
+    //Display changes after time runs out or all questions answered
     questdisplay.setAttribute("style", "display: none");
     donedisplay.setAttribute("style","display: block")
     timedisplay.setAttribute("style", "visibility:hidden")
+
+    totalscoredisplay.textContent = "Total score this round: " + score;
+
+    submitinit.addEventListener("click", storeInitials);
 }
+
+function storeInitials(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    let storedinit = initials.value;
+    console.log("hey I'm here");
+    console.log(storedinit);
+    
+
+    // localStorage.setItem("initials", initials.value);
+    // localStorage.setItem("score", score.val());
+}
+
+
 /*Start quize after user clicks 'start quiz' button*/
 startquiz.addEventListener("click",displayQuestions)
 
