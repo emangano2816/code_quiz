@@ -98,7 +98,8 @@
 }
 
 /*Styles specific to the alldone-container*/
-.totalscore-line {
+.totalscore-line,
+#score {
     font-size:1.5rem;
     color:indigo;
 
