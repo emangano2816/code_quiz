@@ -100,7 +100,8 @@ const choice4 = document.querySelector(".answer4");
 const answer = document.querySelector(".result-container");
 /*All Done*/
 const donedisplay = document.querySelector(".alldone-display");
-const totalscoredisplay = document.querySelector(".totalscore-line");
+// const totalscoredisplay = document.querySelector(".totalscore-line");
+const scoredisplay=document.querySelector("#score");
 const initials = document.querySelector("#initials");
 const submitinit = document.querySelector(".submit-init-btn");
 /*High Score*/
@@ -119,7 +120,7 @@ let sec = 60;
 let timer = setInterval(function() {
         seconds.innerHTML=sec;
         sec--;
-        if (sec < 0) {
+        if (sec === 0) {
             clearInterval(timer);
             allDone();
         }
@@ -130,8 +131,8 @@ function displayQuestions() {
     //Display changes after user clicks start quiz
     quizdisplay.setAttribute("style", "display: none");
     questdisplay.setAttribute("style", "display: block");
-    timedisplay.setAttribute("style", "visibility: visible")
-
+    timedisplay.setAttribute("style", "visibility: visible");
+    
     question.innerText = questions[runningQuestion].question;
     choice1.innerText = questions[runningQuestion].choiceA;
     choice2.innerText = questions[runningQuestion].choiceB;
@@ -172,25 +173,47 @@ function allDone() {
     donedisplay.setAttribute("style","display: block")
     timedisplay.setAttribute("style", "visibility:hidden")
 
-    totalscoredisplay.textContent = "Total score this round: " + score;
+    scoredisplay.innerHTML = score;
 
-    submitinit.addEventListener("click", storeInitials);
+    submitinit.addEventListener("click", function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        
+        if(initials.value.toString().length > 1 && initials.value.toString().length <= 3 && validateInitials(initials.value.toString())){
+            displayHighScores();
+        } else {
+            alert("Please provide a minimum of two and no more than 3 initials.")
+        };
+        // localStorage.setItem("initials",initials.value + " - " + score);
+        // console.log(localStorage.getItem("initials"));
+    });
 }
 
-function storeInitials(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    let storedinit = initials.value;
-    console.log("hey I'm here");
-    console.log(storedinit);
-    
-
-    // localStorage.setItem("initials", initials.value);
-    // localStorage.setItem("score", score.val());
+function validateInitials (entry){
+    var letters = /^[A-Za-z]+$/;
+    if (entry.match(letters)) {
+        return true;
+    } else {
+        return false;
+    }
 }
+
+function displayHighScores() {
+    donedisplay.setAttribute("style","display:none");
+    hsdisplay.setAttribute("style", "display: block");
+
+}
+
+
+
+
 
 
 /*Start quize after user clicks 'start quiz' button*/
-startquiz.addEventListener("click",displayQuestions)
+startquiz.addEventListener("click", function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    displayQuestions();
+});
 
 
