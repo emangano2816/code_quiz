@@ -100,6 +100,7 @@ const choice4 = document.querySelector(".answer4");
 const answer = document.querySelector(".result-container");
 /*All Done*/
 const donedisplay = document.querySelector(".alldone-display");
+const alldoneheader = document.querySelector(".alldone-header");
 // const totalscoredisplay = document.querySelector(".totalscore-line");
 const scoredisplay=document.querySelector("#score");
 const initials = document.querySelector("#initials");
@@ -122,7 +123,7 @@ let timer = setInterval(function() {
         sec--;
         if (sec === 0) {
             clearInterval(timer);
-            allDone();
+            allDone("Time's Up!", "red");
         }
     }, 1000);
 
@@ -158,20 +159,27 @@ function checkAnswer(response) {
 }
 
 function nextQuestion() {
-    if (runningQuestion < lastQuestion && sec > 0) {
+    if (sec > 0) {
+        if (runningQuestion < lastQuestion) {
         runningQuestion++;  //go to the next question
         displayQuestions();
+        } else {
+            console.log("Show all-done section");
+            allDone("All Done!", "green");
+        } 
     } else {
-        console.log("Show all-done section");
-        allDone();
+            allDone("Time's Up!", "red")
+        }
     }
-}
 
-function allDone() {
+function allDone(message, messagecolor) {
     //Display changes after time runs out or all questions answered
     questdisplay.setAttribute("style", "display: none");
-    donedisplay.setAttribute("style","display: block")
-    timedisplay.setAttribute("style", "visibility:hidden")
+    donedisplay.setAttribute("style","display: block");
+    timedisplay.setAttribute("style", "visibility:hidden");
+
+    alldoneheader.innerHTML = message;
+    alldoneheader.style.color = messagecolor;
 
     scoredisplay.innerHTML = score;
 
