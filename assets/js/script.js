@@ -207,14 +207,37 @@ function validateInitials (entry){
 }
 
 function displayHighScores() {
+    hs_link.setAttribute("style","visibility:hidden");
     donedisplay.setAttribute("style","display:none");
-    hsdisplay.setAttribute("style", "display: block");
+    hsdisplay.setAttribute("style", "display:block");
 
 }
 
+//Event listener for High Scores - Go Back to Start button
+gobackstart.addEventListener("click", function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    hs_link.setAttribute("style","visibility:visible");
+    hsdisplay.setAttribute("style", "display:none");
+    quizdisplay.setAttribute("style","display:block");
+});
 
+//Event listener for High Scores - Clear Scores button
+clearscores.addEventListener("click", function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    //add code after Saturday's class about localStorage
+})
 
+//Event listener for Header - View Highs Scores link
+hs_link.addEventListener("click", function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    quizdisplay.setAttribute("style", "display:none");
+    hsdisplay.setAttribute("style", "display:block");
+    hs_link.setAttribute("style", "visibility:hidden");
 
+})
 
 
 /*Start quize after user clicks 'start quiz' button*/
