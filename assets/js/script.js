@@ -117,23 +117,19 @@ let runningQuestion = 0;
 let score = 0;
 
 //creating variables to track time
-let sec = 60;
-let timer = setInterval(function() {
-        seconds.innerHTML=sec;
-        sec--;
-        if (sec === 0) {
-            clearInterval(timer);
-            allDone("Time's Up!", "red");
-        }
-    }, 1000);
+let sec;
+let timer;
+
 
 
 function displayQuestions() {
+
     //Display changes after user clicks start quiz
     quizdisplay.setAttribute("style", "display: none");
     questdisplay.setAttribute("style", "display: block");
     timedisplay.setAttribute("style", "visibility: visible");
-    
+
+   
     question.innerText = questions[runningQuestion].question;
     choice1.innerText = questions[runningQuestion].choiceA;
     choice2.innerText = questions[runningQuestion].choiceB;
@@ -233,17 +229,41 @@ clearscores.addEventListener("click", function(event) {
 hs_link.addEventListener("click", function(event) {
     event.preventDefault();
     event.stopPropagation();
-    quizdisplay.setAttribute("style", "display:none");
-    hsdisplay.setAttribute("style", "display:block");
-    hs_link.setAttribute("style", "visibility:hidden");
 
+    if (timer < 60 && timer > 0) {
+        if (confirm("You are exiting the game.  Click 'OK' to exit or 'Cancel' to continue playing.")) {
+            //Display changes after user click link
+            quizdisplay.setAttribute("style", "display:none");
+            questdisplay.setAttribute("style","display:none");
+            answer.setAttribute("style", "display:none");
+            hsdisplay.setAttribute("style", "display:block");
+            hs_link.setAttribute("style", "visibility:hidden");
+            timedisplay.setAttribute("style", "visibility: hidden");
+
+            //Resetting timer and start question
+            clearInterval(timer);
+            runningQuestion = 0;
+        }
+    }
 })
 
 
-/*Start quize after user clicks 'start quiz' button*/
+/*Start quiz after user clicks 'start quiz' button*/
 startquiz.addEventListener("click", function(event) {
     event.preventDefault();
     event.stopPropagation();
+
+    sec = 60;
+    seconds.innerHTML = sec;
+    timer = setInterval(function() {
+        seconds.innerHTML=sec;
+        sec--;
+        if (sec === 0) {
+            clearInterval(timer);
+            allDone("Time's Up!", "red");
+        }
+    }, 1000);
+
     displayQuestions();
 });
 
