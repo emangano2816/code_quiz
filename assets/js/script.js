@@ -196,8 +196,11 @@ function allDone(message, messagecolor) {
         } else {
             alert("Please provide a minimum of two and no more than 3 initials.")
         };
-        // localStorage.setItem("initials",initials.value + " - " + score);
-        // console.log(localStorage.getItem("initials"));
+
+        highscores.push(initials.value.toString().toUpperCase() + " - " + score.toString());
+        localStorage.setItem("highscores",JSON.stringify(highscores));
+
+        
     });
 }
 
@@ -211,19 +214,30 @@ function validateInitials (entry){
 }
 
 //Render scores into a highscore list as <li> elements
-function renderHighScores() {
-    hs_container.innerHTML = "";
+// function renderHighScores() {
+//     hs_container.innerHTML = "";
 
-    for (var i = 0; i < highscores.length; i++) {
-        var hs_line = highscores[i];
+//     for (var i = 0; i < highscores.length; i++) {
+//         var hs_line = highscores[i];
 
-        var hsli = document.createElement("li");
-        hsli.textContent = hs_line;
-        hsli.setAttribute("data-index", i);
+//         var hsli = document.createElement("li");
+//         hsli.textContent = hs_line;
+//         hsli.setAttribute("data-index", i);
 
-        hs_container.appendChild(hsli);
-    }
-}
+//         hs_container.appendChild(hsli);
+//     }
+// }
+
+// //Run when the HS page is displayed
+// function init() {
+//     var storedHS = JSON.parse(localStorage.getItem("highscores"));
+
+//     if (storedHS !== null) {
+//         hs_line = storedHS;
+//     }
+
+//     renderHighScores();
+// }
 
 function displayHighScores() {
     hs_link.setAttribute("style","visibility:hidden");
