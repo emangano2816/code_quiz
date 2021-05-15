@@ -107,7 +107,7 @@ const initials = document.querySelector("#initials");
 const submitinit = document.querySelector(".submit-init-btn");
 /*High Score*/
 const hsdisplay = document.querySelector(".highscore-display");
-const hs_line = document.querySelector(".highscore-li")
+const hs_container = document.querySelector(".highscore-list")
 const clearscores = document.querySelector(".clear-scores-btn");
 const gobackstart = document.querySelector(".goback-btn")
 
@@ -121,6 +121,9 @@ let alldonepage = false;
 //creating variables to track time
 let sec;
 let timer;
+
+//creating variable to track highscores
+let highscores = [];
 
 
 
@@ -178,9 +181,9 @@ function allDone(message, messagecolor) {
     donedisplay.setAttribute("style","display: block");
     timedisplay.setAttribute("style", "visibility:hidden");
 
-    alldoneheader.innerHTML = message;
+    alldoneheader.textContent = message;
     alldoneheader.style.color = messagecolor;
-    scoredisplay.innerHTML = score;
+    scoredisplay.textContent = score;
 
     gamestarted = false;
 
@@ -204,6 +207,21 @@ function validateInitials (entry){
         return true;
     } else {
         return false;
+    }
+}
+
+//Render scores into a highscore list as <li> elements
+function renderHighScores() {
+    hs_container.innerHTML = "";
+
+    for (var i = 0; i < highscores.length; i++) {
+        var hs_line = highscores[i];
+
+        var hsli = document.createElement("li");
+        hsli.textContent = hs_line;
+        hsli.setAttribute("data-index", i);
+
+        hs_container.appendChild(hsli);
     }
 }
 
