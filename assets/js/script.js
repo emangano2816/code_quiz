@@ -111,10 +111,12 @@ const hs_line = document.querySelector(".highscore-li")
 const clearscores = document.querySelector(".clear-scores-btn");
 const gobackstart = document.querySelector(".goback-btn")
 
-//creating variables to track questions
+//creating variables to track questions, score, and which page
 const lastQuestion = questions.length - 1;
 let runningQuestion = 0;
 let score = 0;
+let gamestarted = false;
+let alldonepage = false;
 
 //creating variables to track time
 let sec;
@@ -161,9 +163,11 @@ function nextQuestion() {
         displayQuestions();
         } else {
             console.log("Show all-done section");
+            alldonepage = true;
             allDone("All Done!", "green");
         } 
     } else {
+            alldonepage = true;
             allDone("Time's Up!", "red")
         }
     }
@@ -176,8 +180,9 @@ function allDone(message, messagecolor) {
 
     alldoneheader.innerHTML = message;
     alldoneheader.style.color = messagecolor;
-
     scoredisplay.innerHTML = score;
+
+    gamestarted = false;
 
     submitinit.addEventListener("click", function(event){
         event.preventDefault();
@@ -230,7 +235,7 @@ hs_link.addEventListener("click", function(event) {
     event.preventDefault();
     event.stopPropagation();
 
-    if (timer < 60 && timer > 0) {
+    if (gamestarted === true) {
         if (confirm("You are exiting the game.  Click 'OK' to exit or 'Cancel' to continue playing.")) {
             //Display changes after user click link
             quizdisplay.setAttribute("style", "display:none");
@@ -244,6 +249,18 @@ hs_link.addEventListener("click", function(event) {
             clearInterval(timer);
             runningQuestion = 0;
         }
+    } else if (alldonepage ===  true) {
+        if (confirm("If you leave this page you won't be able to save your high score. Click 'OK' to exit or 'Cancel' to input initials.")) {
+            donedisplay.setAttribute("style", "display:none");
+            hsdisplay.setAttribute("style", "display:block");
+            hs_link.setAttribute("style", "visibility:hidden");
+            timedisplay.setAttribute("style", "visibility: hidden");
+        }
+    } else {
+        quizdisplay.setAttribute("style", "display:none");
+        hsdisplay.setAttribute("style", "display:block");
+        hs_link.setAttribute("style", "visibility:hidden");
+        timedisplay.setAttribute("style", "visibility: hidden");
     }
 })
 
@@ -260,10 +277,12 @@ startquiz.addEventListener("click", function(event) {
         sec--;
         if (sec === 0) {
             clearInterval(timer);
+            alldonepage = true;
             allDone("Time's Up!", "red");
         }
     }, 1000);
 
+    gamestarted = true;
     displayQuestions();
 });
 
