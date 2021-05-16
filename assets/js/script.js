@@ -124,7 +124,8 @@ let timer;
 
 //creating variable to track highscores
 let highscores = [];
-
+//Display stored Highscores upon refresh, if they exist
+init();
 
 
 function displayQuestions() {
@@ -180,31 +181,39 @@ function allDone(message, messagecolor) {
     questdisplay.setAttribute("style", "display: none");
     donedisplay.setAttribute("style","display: block");
     timedisplay.setAttribute("style", "visibility:hidden");
+    answer.setAttribute("style", "display:none");
+    answer.innerHTML = "";
 
     alldoneheader.textContent = message;
     alldoneheader.style.color = messagecolor;
     scoredisplay.textContent = score;
 
     gamestarted = false;
+    clearInterval(timer);
+    runningQuestion = 0;
+
 
     submitinit.addEventListener("click", function(event){
         event.preventDefault();
         event.stopPropagation();
         
-        if(initialsLength() && validateAlphas(initials.value.toString())){
+        if(checkLength() && checkAlphas(initials.value.toString())){
             highscores.push(initials.value.toString().toUpperCase() + " - " + score.toString());
+            score = 0;
             
         } else {
             alert("Please provide a minimum of two and no more than 3 initials.");
             return;
         }  
         
-        localStorage.setItem("highscores",JSON.stringify(highscores));
-        displayHighScores();
+        initials.value="";
+        storeHighscores();
+        renderHighscores();
+        displayHighscores();
     });
 }
 
-function initialsLength () {
+function checkLength () {
     if (initials.value.toString().length > 1 && initials.value.toString().length <= 3) {
         return true;
     } else {
@@ -212,7 +221,7 @@ function initialsLength () {
     }
 }
 
-function validateAlphas (entry){
+function checkAlphas (entry){
     var letters = /^[A-Za-z]+$/;
     if (entry.match(letters)) {
         return true;
@@ -221,40 +230,43 @@ function validateAlphas (entry){
     }
 }
 
+function storeHighscores() {
+    //stringify and set key in localStorage to highscores array
+    localStorage.setItem("highscores",JSON.stringify(highscores));
+}
+
 //Render scores into a highscore list as <li> elements
-// function renderHighScores() {
-//     hs_container.innerHTML = "";
+function renderHighscores() {
+    hs_container.innerHTML = "";
 
-//     for (var i = 0; i < highscores.length; i++) {
-//         var hs_line = highscores[i];
+    for (var i = 0; i < highscores.length; i++) {
+        var hs_line = highscores[i];
 
-//         var hsli = document.createElement("li");
-//         hsli.textContent = hs_line;
-//         hsli.setAttribute("data-index", i);
+        var hsli = document.createElement("li");
+        hsli.textContent = hs_line;
+        hs_container.appendChild(hsli);
+    }
+}
 
-//         hs_container.appendChild(hsli);
-//     }
-// }
+//Run when the Highscore page is displayed
+function init() {
+    var storedHS = JSON.parse(localStorage.getItem("highscores"));
 
-// //Run when the HS page is displayed
-// function init() {
-//     var storedHS = JSON.parse(localStorage.getItem("highscores"));
+    if (storedHS !== null) {
+        highscores = storedHS;
+    }
 
-//     if (storedHS !== null) {
-//         hs_line = storedHS;
-//     }
+    renderHighscores();
+}
 
-//     renderHighScores();
-// }
-
-function displayHighScores() {
+function displayHighscores() {
     hs_link.setAttribute("style","visibility:hidden");
     donedisplay.setAttribute("style","display:none");
     hsdisplay.setAttribute("style", "display:block");
 
     alldonepage = false;
 
-    hs_container.textContent = JSON.parse(localStorage.getItem("highscores"));
+    init();
 
 }
 
