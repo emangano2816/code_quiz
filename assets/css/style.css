@@ -126,8 +126,13 @@
 
 .highscore-list {
     width: 50%;
-    padding: 0.5rem;
-    font-size: 1.5rem;
+
+}
+
+li {
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
     background: #dda1f5;
 }
 

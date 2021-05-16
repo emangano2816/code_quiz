@@ -200,16 +200,17 @@ function allDone(message, messagecolor) {
         if(checkLength() && checkAlphas(initials.value.toString())){
             highscores.push(initials.value.toString().toUpperCase() + " - " + score.toString());
             score = 0;
+            initials.value="";
+            storeHighscores();
+            renderHighscores();
+            displayHighscores();
+            return;
+            
             
         } else {
             alert("Please provide a minimum of two and no more than 3 initials.");
             return;
         }  
-        
-        initials.value="";
-        storeHighscores();
-        renderHighscores();
-        displayHighscores();
     });
 }
 
@@ -284,7 +285,7 @@ clearscores.addEventListener("click", function(event) {
     event.preventDefault();
     event.stopPropagation();
     
-    localStorage.setItem("highscores","");
+    localStorage.clear();
     hs_container.textContent = "";
 })
 
