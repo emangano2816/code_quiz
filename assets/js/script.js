@@ -191,20 +191,28 @@ function allDone(message, messagecolor) {
         event.preventDefault();
         event.stopPropagation();
         
-        if(initials.value.toString().length > 1 && initials.value.toString().length <= 3 && validateInitials(initials.value.toString())){
-            displayHighScores();
+        if(initialsLength() && validateAlphas(initials.value.toString())){
+            highscores.push(initials.value.toString().toUpperCase() + " - " + score.toString());
+            
         } else {
-            alert("Please provide a minimum of two and no more than 3 initials.")
-        };
-
-        highscores.push(initials.value.toString().toUpperCase() + " - " + score.toString());
-        localStorage.setItem("highscores",JSON.stringify(highscores));
-
+            alert("Please provide a minimum of two and no more than 3 initials.");
+            return;
+        }  
         
+        localStorage.setItem("highscores",JSON.stringify(highscores));
+        displayHighScores();
     });
 }
 
-function validateInitials (entry){
+function initialsLength () {
+    if (initials.value.toString().length > 1 && initials.value.toString().length <= 3) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function validateAlphas (entry){
     var letters = /^[A-Za-z]+$/;
     if (entry.match(letters)) {
         return true;
@@ -244,9 +252,13 @@ function displayHighScores() {
     donedisplay.setAttribute("style","display:none");
     hsdisplay.setAttribute("style", "display:block");
 
+    alldonepage = false;
+
+    hs_container.textContent = JSON.parse(localStorage.getItem("highscores"));
+
 }
 
-//Event listener for High Scores - Go Back to Start button
+//Event listener for Go Back to Start button
 gobackstart.addEventListener("click", function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -255,14 +267,16 @@ gobackstart.addEventListener("click", function(event) {
     quizdisplay.setAttribute("style","display:block");
 });
 
-//Event listener for High Scores - Clear Scores button
+//Event listener for Clear Scores button
 clearscores.addEventListener("click", function(event) {
     event.preventDefault();
     event.stopPropagation();
-    //add code after Saturday's class about localStorage
+    
+    localStorage.setItem("highscores","");
+    hs_container.textContent = "";
 })
 
-//Event listener for Header - View Highs Scores link
+//Event listener View Highs Scores link
 hs_link.addEventListener("click", function(event) {
     event.preventDefault();
     event.stopPropagation();
