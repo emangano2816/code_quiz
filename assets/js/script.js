@@ -102,8 +102,9 @@ const answer = document.querySelector(".result-container");
 const donedisplay = document.querySelector(".alldone-display");
 const alldoneheader = document.querySelector(".alldone-header");
 // const totalscoredisplay = document.querySelector(".totalscore-line");
+const formdisplay=document.querySelector(".collect-hs-initials");
 const scoredisplay=document.querySelector("#score");
-const initials = document.querySelector("#initials");
+var initials = document.querySelector("#initials");
 const submitinit = document.querySelector(".submit-init-btn");
 /*High Score*/
 const hsdisplay = document.querySelector(".highscore-display");
@@ -169,12 +170,10 @@ function nextQuestion() {
             console.log("Show all-done section");
             alldonepage = true;
             allDone("All Done!", "green");
+            return;
         } 
-    } else {
-            alldonepage = true;
-            allDone("Time's Up!", "red")
-        }
-    }
+    } 
+}
 
 function allDone(message, messagecolor) {
     //Display changes after time runs out or all questions answered
@@ -192,27 +191,25 @@ function allDone(message, messagecolor) {
     clearInterval(timer);
     runningQuestion = 0;
 
-
-    submitinit.addEventListener("click", function(event){
-        event.preventDefault();
-        event.stopPropagation();
-        
-        if(checkLength() && checkAlphas(initials.value.toString())){
-            highscores.push(initials.value.toString().toUpperCase() + " - " + score.toString());
-            score = 0;
-            initials.value="";
-            storeHighscores();
-            renderHighscores();
-            displayHighscores();
-            return;
-            
-            
-        } else {
-            alert("Please provide a minimum of two and no more than 3 initials.");
-            return;
-        }  
-    });
+    submitinit.addEventListener("click", saveInitials);
 }
+
+function saveInitials(event){
+    event.preventDefault();
+    event.stopPropagation();
+
+    var checklength = checkLength();
+    var checkalphas = checkAlphas(initials.value.toString()); 
+
+    if(checklength && checkalphas){
+        highscores.push(initials.value.toString().toUpperCase() + " - " + score.toString());
+        score = 0;
+        storeHighscores();
+        displayHighscores();   
+    } else {
+        alert("Please provide a minimum of two and no more than 3 initials.");
+    }  
+};
 
 function checkLength () {
     if (initials.value.toString().length > 1 && initials.value.toString().length <= 3) {
@@ -249,14 +246,13 @@ function renderHighscores() {
     }
 }
 
-//Run when the Highscore page is displayed
+//Initialize highscore display if values in localStorage
 function init() {
     var storedHS = JSON.parse(localStorage.getItem("highscores"));
 
     if (storedHS !== null) {
         highscores = storedHS;
     }
-
     renderHighscores();
 }
 
@@ -268,7 +264,6 @@ function displayHighscores() {
     alldonepage = false;
 
     init();
-
 }
 
 //Event listener for Go Back to Start button
@@ -286,6 +281,7 @@ clearscores.addEventListener("click", function(event) {
     event.stopPropagation();
     
     localStorage.clear();
+    highscores=[];
     hs_container.textContent = "";
 })
 
@@ -323,23 +319,30 @@ hs_link.addEventListener("click", function(event) {
     }
 })
 
+function startTimer() {
+    sec = 30;
+    seconds.innerHTML = sec;
+    timer = setInterval(function() {
+        seconds.innerHTML=sec;
+        sec--;
+
+        if (sec <= 0) {
+            clearInterval(timer);
+            alldonepage = true;
+            allDone("Time's Up!", "red");
+            return;
+        }
+    }, 1000);
+}
 
 /*Start quiz after user clicks 'start quiz' button*/
 startquiz.addEventListener("click", function(event) {
     event.preventDefault();
     event.stopPropagation();
+   
+    formdisplay.reset();
 
-    sec = 60;
-    seconds.innerHTML = sec;
-    timer = setInterval(function() {
-        seconds.innerHTML=sec;
-        sec--;
-        if (sec === 0) {
-            clearInterval(timer);
-            alldonepage = true;
-            allDone("Time's Up!", "red");
-        }
-    }, 1000);
+    startTimer();
 
     gamestarted = true;
     displayQuestions();
