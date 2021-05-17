@@ -161,6 +161,10 @@ function checkAnswer(response) {
     }
 }
 
+function hideAnswer() {
+    answer.setAttribute("style", "display:none");
+}
+
 function nextQuestion() {
     if (sec > 0) {
         if (runningQuestion < lastQuestion) {
