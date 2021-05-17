@@ -30,12 +30,12 @@
 
     <section class="quiz-questions-display">
         <div class="quiz-questions-container">
-            <div class="quest-ans-container" onmousemove="hideAnswer()">
+            <div class="quest-ans-container" >
                 <h2 class="question">Quiz question goes here</h2>
-                <button class="answer-btn answer1" onclick="checkAnswer('A')">Choice 1</button>
-                <button class="answer-btn answer2" onclick="checkAnswer('B')">Choice 2</button>
-                <button class="answer-btn answer3" onclick="checkAnswer('C')">Choice 3</button>
-                <button class="answer-btn answer4" onclick="checkAnswer('D')">Choice 4</button>
+                <button class="answer-btn answer1" onclick="checkAnswer('A')" onmouseover="hideAnswer()">Choice 1</button>
+                <button class="answer-btn answer2" onclick="checkAnswer('B')" onmouseover="hideAnswer()">Choice 2</button>
+                <button class="answer-btn answer3" onclick="checkAnswer('C')" onmouseover="hideAnswer()">Choice 3</button>
+                <button class="answer-btn answer4" onclick="checkAnswer('D')" onmouseover="hideAnswer()">Choice 4</button>
             </div>
             <div class="result-container">
                 Result goes here
