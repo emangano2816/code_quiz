@@ -87,13 +87,13 @@
 
     display: flex;
     flex-direction:column;
-    justify-content:flex-start;    
+    align-items:center;    
 }
 
 .question {
     font-size: 2.25rem;
     width: 100%;
-    height: 50px;
+    height: auto;
     text-align: center;
     margin-top:2rem;
     margin-bottom: 2rem;
@@ -169,8 +169,8 @@ li:nth-child(even) {
 
 .answer-btn {
     display: block;
-    align-content:flex-start;
     margin: 1rem;
+    width: fit-content;
 }
 
 .goback-btn,
