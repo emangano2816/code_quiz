@@ -36,6 +36,16 @@ The application is easy to navigate and uses pop-ups to guide the user in decisi
 
 As the user answers each question, the result (i.e, correct or incorrect) is displayed under the subsequent question until one of the buttons for the current question is moused over.  At that point the result of the previous question will disappear.  Once all questions have been answered or the time runs out, the user is redirected to the On the 'All Done!/Time's Up!' page.  If the user tries to leave the page without providing initials or provides invalid initials (i.e., a null, a value with numerics, or a value that is not at least one and no more than three alphas) pop-ups appear to alert the user and assist with fixing the problem.  Once initials are supplied, the user is redirected to the Highscores page.  This page displays the user's initials - score for all played rounds.  On the Highscores page the user is able to return to the start page to take the quiz again or clear out the saved high scores.
 
-## Screenshot
-![screenshot](/assets/images/)
+## Screenshots
+### Start Quiz
+![start](/assets/images/start_quiz_page.png)
+
+### Question
+![question](/assets/images/question_page.png)
+
+### All Done! / Time's Up
+![question](/assets/images/Alldone_timeup_page.png)
+
+### Highscores
+![question](/assets/images/highscores_page.png)
 
