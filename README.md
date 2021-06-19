@@ -16,7 +16,7 @@ As the user answers each question, the result (i.e, correct or incorrect) is dis
 ## Application Functionality
 ![code_quiz_demo.](./assets/images/code_quiz.gif)
 
-## Contributor(s)
-https://github.com/emangano2816
+## Contact Information
+emangano2816@gmail.com
 
 
