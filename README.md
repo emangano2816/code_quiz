@@ -1,8 +1,7 @@
 # Code Quiz
 
-## URLs
-1. Deployed application: https://emangano2816.github.io/hw4_code_quiz/
-2. GitHub Repository: https://github.com/emangano2816/hw4_code_quiz
+## Deployed Application
+https://emangano2816.github.io/hw4_code_quiz/
 
 ## Description
 The application is easy to navigate and uses pop-ups to guide the user in decision making.  When the URL is accessed the "start page" of the application is displayed.  From the start page the user is able to view highscores or start the quiz.  Once the quiz is started the user is able to click the 'View Highscores' link, however, if that happens while time is running for the quiz, a pop-up will appear letting the user know they are about to exit the game and will not be able to save their score.  
@@ -16,5 +15,8 @@ As the user answers each question, the result (i.e, correct or incorrect) is dis
 
 ## Application Functionality
 ![code_quiz_demo.](./assets/images/code_quiz.gif)
+
+## Contributor(s)
+https://github.com/emangano2816
 
 
