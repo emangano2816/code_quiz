@@ -11,7 +11,7 @@ As the user answers each question, the result (i.e, correct or incorrect) is dis
 ## Technologies Used
 1. HTML
 2. CSS
-3. Javascript Vanilla
+3. Javascript
 
 ## Application Functionality
 ![code_quiz_demo.](./assets/images/code_quiz.gif)
