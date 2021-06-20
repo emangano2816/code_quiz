@@ -19,4 +19,7 @@ As the user answers each question, the result (i.e, correct or incorrect) is dis
 ## Contact Information
 emangano2816@gmail.com
 
+## License
+This project is licensed under the terms of the MIT license.
+
 
